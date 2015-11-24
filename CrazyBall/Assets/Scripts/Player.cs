@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
 	void Update ()
 	{
 		estaNoChao = Physics.Raycast(transform.position, -Vector3.up, 0.51f);
+		gameObject.GetComponent<Renderer>().material.color = new Color(Mathf.Clamp(rb.velocity.x, -0.5F, 0.5F) + 0.5F, Mathf.Clamp(rb.velocity.y, -0.5F, 0.5F) + 0.5F, Mathf.Clamp(rb.velocity.z, -0.5F, 0.5F) + 0.5F, 0.5F);
 
 		if (Input.anyKey)
 		{
@@ -30,6 +31,9 @@ public class Player : MonoBehaviour
 				rb.AddForce(new Vector3(0, 3000, 0));
 		}
 
-		gameObject.GetComponent<Renderer>().material.color = new Color(Mathf.Clamp(rb.velocity.x,-0.5F, 0.5F) + 0.5F, Mathf.Clamp(rb.velocity.y, -0.5F, 0.5F) + 0.5F, Mathf.Clamp(rb.velocity.z, -0.5F, 0.5F) + 0.5F, 0.5F);
+		if (gameObject.transform.position.y < -10)
+		{
+			gameObject.transform.position = new Vector3(0, 3, 0);
+		}
 	}
 }
